@@ -1,0 +1,101 @@
+@extends('layouts.main')
+
+@section('container')
+    <div class="row">
+        <div class="col-lg-12 mt-3 text-center">
+            <h3>JENIS</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3 mb-3">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalkategoris"
+                onclick="return tambahJenis('{{ route('jenisAdd') }}')">
+                Tambah
+            </button>
+        </div>
+    </div>
+    @error('txtnama')
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>{{ $message }}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @enderror
+    @if (session('success'))
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong> {{ session('success') }}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+    <div class="row">
+        <div class="col-lg-12 mb-3">
+            <table class="table table-bordered">
+                <thead class="bg-primary">
+                    <tr>
+                        <th scope="col" class="bg-primary text-light">No</th>
+                        <th scope="col" class="bg-primary text-light">Nama</th>
+                        <th scope="col" class="bg-primary text-light text-center">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($data as $p)
+                        <tr>
+                            <th>{{ $loop->iteration }}</th>
+                            <td>{{ $p->nama }}</td>
+                            <td class="text-center">
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                    <form action="{{ route('jenisDelete', ['id' => $p->id]) }}" method="POST"
+                                        onsubmit="return confirm('Apa anda yakin untuk menghapus?')">
+                                        <button type="button" class="btn p-0"
+                                            onclick="return updateJenis('{{ route('jenisUpdate', ['id' => $p->id]) }}', '{{ $p->id }}')"
+                                            data-bs-toggle="modal" data-bs-target="#modalkategoris">
+                                            <span class="badge text-bg-primary"> Update
+                                            </span>
+                                        </button>
+
+                                        @csrf
+
+                                        <button type="submit" class="btn p-0">
+                                            <span class="badge text-bg-danger">
+                                                Delete
+                                            </span>
+                                        </button>
+
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="modalkategoris" tabindex="-1" aria-labelledby="modalkategorisLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="modalkategorisLabel">Form Jenis</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="{{ route('jenisAdd') }}" method="post" onsubmit="return confirm('apa anda yakin?')"
+                    id="formKategori">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="txtnama" class="form-label">Nama</label>
+                            <input type="hidden" class="form-control" id="txtid" name="txtid" autocomplete="off"
+                                required>
+                            <input type="text" class="form-control" id="txtnama" name="txtnama" autocomplete="off"
+                                required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+@endsection
