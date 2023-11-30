@@ -1,3 +1,9 @@
+aplikasi laravel ini setelah di clone memiliki 1 name database bernama crud-laravel 2 memiliki 3 table yaitu table barang,kategori,serta jenis 3 untuk hit api barang ada di : http://127.0.0.1:8000/api/barangs (all barang), http://127.0.0.1:8000/api/](http://127.0.0.1:8000/api/addBarangs?nama=karpet&kategori=2&jenis=1 (add barang), http://127.0.0.1:8000/api/updateBarangs?id=4&nama=handuk&kategori=1&jenis=1 (update barang), http://127.0.0.1:8000/api/deleteBarangs?id=5 (delete barang) dsb. 4 jika ingin melihat tampilan web ada di http://127.0.0.1:8000/kategoris
+
+
+
+
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
